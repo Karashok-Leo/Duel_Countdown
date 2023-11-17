@@ -1,0 +1,13 @@
+{
+    "type": "duel-countdown:duel_field_dim_type",
+    "generator": {
+      "type": "minecraft:flat",
+      "settings": {
+        "biome": "duel-countdown:duel_field_biome",
+        "lakes": false,
+        "features": false,
+        "layers": [],
+        "structure_overrides": []
+      }
+    }
+}
