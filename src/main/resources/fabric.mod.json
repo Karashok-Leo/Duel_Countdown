@@ -3,13 +3,13 @@
   "id": "duel-countdown",
   "version": "${version}",
   "name": "Duel Countdown",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Duel!",
   "authors": [
-    "Me!"
+    "Leo!"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/Karashok-Leo/Duel_Countdown"
   },
   "license": "CC0-1.0",
   "icon": "assets/duel-countdown/icon.png",
@@ -23,9 +23,6 @@
     ],
     "fabric-datagen": [
       "net.karashokleo.duelcountdown.DuelCountdownData"
-    ],
-    "cardinal-components": [
-      "net.karashokleo.duelcountdown.DuelComponents"
     ]
   },
   "mixins": [
@@ -39,10 +36,5 @@
   },
   "suggests": {
     "another-mod": "*"
-  },
-  "custom": {
-    "cardinal-components": [
-      "duel-countdown:is_winner"
-    ]
   }
 }

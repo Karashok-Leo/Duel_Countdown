@@ -2,7 +2,7 @@ package net.karashokleo.duelcountdown.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.karashokleo.duelcountdown.Constants;
+import net.karashokleo.duelcountdown.DuelInfos;
 import net.minecraft.registry.RegistryWrapper;
 
 import java.util.concurrent.CompletableFuture;
@@ -17,8 +17,8 @@ public class RegistryProvider extends FabricDynamicRegistryProvider
     @Override
     protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries)
     {
-        entries.add(Constants.DIMENSION_TYPE_KEY, Constants.DUEL_DIM_TYPE);
-        entries.add(Constants.BIOME_KEY, Constants.DUEL_BIOME);
+        entries.add(DuelInfos.DIMENSION_TYPE_KEY, DuelInfos.DUEL_DIM_TYPE);
+        entries.add(DuelInfos.BIOME_KEY, DuelInfos.DUEL_BIOME);
     }
 
     @Override

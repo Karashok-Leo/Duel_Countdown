@@ -1,82 +1,59 @@
 package net.karashokleo.duelcountdown;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.karashokleo.duelcountdown.config.DuelConfig;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
-import java.util.List;
-
 public class DuelCountdown implements ModInitializer
 {
-    private static final int DUEL_GAP = Constants.DUEL_GAP * 20;
-    private static final int COUNTDOWN = (Constants.COUNTDOWN + 1) * 20;
-
     private static MinecraftServer runningServer;
-
-    public static int countdown;
+    private static DuelManager duelManager;
 
     static
     {
         ServerLifecycleEvents.SERVER_STARTED.register(server ->
         {
             runningServer = server;
-            countdown = DUEL_GAP;
+            duelManager = new DuelManager();
         });
 
-        ServerLifecycleEvents.SERVER_STOPPED.register(server -> countdown = 0);
+        ServerTickEvents.END_SERVER_TICK.register(server -> duelManager.tick());
 
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
+        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) ->
         {
-            dispatcher.register(CommandManager.literal("duel")
-                    .executes(context ->
-                    {
-                        if (context.getSource().isExecutedByPlayer())
-                        {
-                            context.getSource().getPlayerOrThrow().teleport(getDuelField(), 0, 1.2, 0, 0, 0);
-                        }
-                        return 0;
-                    })
-            );
-        });
-
-        ServerTickEvents.START_SERVER_TICK.register(server ->
-        {
-            countdown--;
-            if (countdown % 20 == 0 && countdown <= COUNTDOWN && countdown > 0)
-            {
-                DuelEvent.updatePlayerList();
-                DuelEvent.countdownTitle(countdown / 20 - 1);
-            }
-            if (countdown == 0)
-            {
-                countdown = DUEL_GAP;
-                DuelEvent.updatePlayerList();
-                DuelEvent.startTitle();
-                DuelEvent.placePlatform(0, 0, 16, 6);
-                DuelEvent.playerReady();
-            }
+            if (killedEntity instanceof ServerPlayerEntity && entity instanceof ServerPlayerEntity killer)
+                ServerPlayNetworking.send(killer, DuelInfos.PLAYER_KILL_ID, PacketByteBufs.create());
         });
 
         ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register(((player, origin, destination) ->
         {
-            if (isDuelField(origin) && player != DuelEvent.winner)
+            if (isDuelField(origin) && !player.hasStatusEffect(DuelRegistry.WINNER) && !player.hasStatusEffect(DuelRegistry.NECESSITY))
                 player.kill();
         }));
 
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries ->
+        {
+            entries.add(DuelRegistry.NECESSITY_CHARM);
+            entries.add(DuelRegistry.ENCHANTED_NECESSITY_CHARM);
+        });
 
-    }
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> entries.add(DuelRegistry.BACKER_ITEM));
 
-    @Override
-    public void onInitialize()
-    {
-
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> DuelCommands.register(dispatcher));
     }
 
     public static MinecraftServer getServer()
@@ -84,18 +61,26 @@ public class DuelCountdown implements ModInitializer
         return runningServer;
     }
 
-    public static List<ServerPlayerEntity> getPlayers()
+    public static DuelManager getDuelManager()
     {
-        return getServer().getPlayerManager().getPlayerList();
+        return duelManager;
     }
 
     public static ServerWorld getDuelField()
     {
-        return getServer().getWorld(Constants.WORLD_KEY);
+        return getServer().getWorld(DuelInfos.WORLD_KEY);
     }
 
     public static boolean isDuelField(World world)
     {
-        return world.getRegistryKey().equals(Constants.WORLD_KEY);
+        return world.getRegistryKey().equals(DuelInfos.WORLD_KEY);
+    }
+
+    @Override
+    public void onInitialize()
+    {
+        AutoConfig.register(DuelConfig.class, GsonConfigSerializer::new);
+        DuelInfos.CONFIG = AutoConfig.getConfigHolder(DuelConfig.class).getConfig();
+        DuelRegistry.register();
     }
 }

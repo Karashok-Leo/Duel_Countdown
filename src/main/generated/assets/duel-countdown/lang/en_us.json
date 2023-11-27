@@ -1,1 +1,21 @@
-{}
+{
+  "biome.duel-countdown.duel_field_biome": "Duel Field",
+  "block.duel-countdown.backer": "Backer",
+  "duel.bar.countdown": "Countdown: %1$s",
+  "duel.bar.remain": "Remain: %1$s",
+  "duel.bar.stop": "Stopped",
+  "duel.bar.sufficient": "Sufficient number of players",
+  "duel.bar.title": "Duel",
+  "duel.bar.winner": "Winner: %1$s",
+  "duel.commands.auto.gap.get": "Current duel gap is: %1$s seconds",
+  "duel.commands.auto.gap.set": "Duel gap has been set to: %1$s seconds",
+  "duel.commands.auto.pause": "Countdown paused!",
+  "duel.commands.auto.rest.get": "Current countdown is: %1$s seconds",
+  "duel.commands.auto.rest.set": "Countdown has been set to: %1$s seconds",
+  "duel.commands.auto.start": "Countdown started!",
+  "duel.commands.auto.stop": "Countdown stopped!",
+  "effect.duel-countdown.necessity": "Necessity",
+  "effect.duel-countdown.winner": "Winner",
+  "item.duel-countdown.enchanted_necessity_charm": "Enchanted Necessity Charm",
+  "item.duel-countdown.necessity_charm": "Necessity Charm"
+}
