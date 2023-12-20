@@ -1,0 +1,61 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crying_obsidian": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:crying_obsidian"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_enchanted_necessity_charm": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "duel-countdown:enchanted_necessity_charm"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_necessity_charm": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "duel-countdown:necessity_charm"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "duel-countdown:enchanted_necessity_charm"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_enchanted_necessity_charm",
+      "has_crying_obsidian",
+      "has_necessity_charm",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "duel-countdown:enchanted_necessity_charm"
+    ]
+  },
+  "sends_telemetry_event": false
+}

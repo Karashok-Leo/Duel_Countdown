@@ -1,0 +1,21 @@
+{
+  "biome.duel-countdown.duel_field_biome": "决斗领域",
+  "block.duel-countdown.backer": "凯旋",
+  "duel.bar.countdown": "倒计时: %1$s",
+  "duel.bar.remain": "剩余玩家: %1$s",
+  "duel.bar.stop": "已中断",
+  "duel.bar.sufficient": "玩家人数不足",
+  "duel.bar.title": "决斗",
+  "duel.bar.winner": "获胜者: %1$s",
+  "duel.commands.auto.gap.get": "当前的决斗间隔是: %1$s 秒",
+  "duel.commands.auto.gap.set": "决斗间隔已设置为: %1$s 秒",
+  "duel.commands.auto.pause": "倒计时已暂停!",
+  "duel.commands.auto.rest.get": "当前的倒计时是: %1$s 秒",
+  "duel.commands.auto.rest.set": "倒计时已设置为: %1$s 秒",
+  "duel.commands.auto.start": "倒计时已开始!",
+  "duel.commands.auto.stop": "倒计时已中断!",
+  "effect.duel-countdown.necessity": "紧急避险",
+  "effect.duel-countdown.winner": "获胜者",
+  "item.duel-countdown.enchanted_necessity_charm": "附魔紧急避险护符",
+  "item.duel-countdown.necessity_charm": "紧急避险护符"
+}

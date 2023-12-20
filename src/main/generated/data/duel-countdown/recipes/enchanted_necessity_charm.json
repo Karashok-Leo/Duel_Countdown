@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "duel-countdown:necessity_charm"
+    },
+    "o": {
+      "item": "minecraft:crying_obsidian"
+    }
+  },
+  "pattern": [
+    "ooo",
+    "oco",
+    "ooo"
+  ],
+  "result": {
+    "item": "duel-countdown:enchanted_necessity_charm"
+  },
+  "show_notification": true
+}

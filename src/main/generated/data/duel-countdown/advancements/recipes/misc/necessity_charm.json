@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_necessity_charm": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "duel-countdown:necessity_charm"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_player_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:player_head"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "duel-countdown:necessity_charm"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_necessity_charm",
+      "has_player_head",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "duel-countdown:necessity_charm"
+    ]
+  },
+  "sends_telemetry_event": false
+}
