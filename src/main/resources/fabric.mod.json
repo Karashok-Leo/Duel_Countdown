@@ -3,12 +3,11 @@
   "id": "duel-countdown",
   "version": "${version}",
   "name": "Duel Countdown",
-  "description": "Duel!",
+  "description": "Duel Countdown",
   "authors": [
-    "Leo!"
+    "Karashok-Leo"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/Karashok-Leo/Duel_Countdown"
   },
   "license": "GPLv3",
@@ -35,6 +34,5 @@
     "fabric-api": "*"
   },
   "suggests": {
-    "another-mod": "*"
   }
 }
