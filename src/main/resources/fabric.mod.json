@@ -11,7 +11,7 @@
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/Karashok-Leo/Duel_Countdown"
   },
-  "license": "CC0-1.0",
+  "license": "GPLv3",
   "icon": "assets/duel-countdown/icon.png",
   "environment": "*",
   "entrypoints": {
